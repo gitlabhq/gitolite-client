@@ -63,6 +63,13 @@ describe Gitolite::SSHKey do
       s.owner.should == 'joe-bob@god-zilla.com'
       s.location.should == 'desktop'
     end
+
+    it 'should load a key which name is using mail alias' do
+      key = File.join(key_dir, 'bob+alias@desktop.pub')
+      s = SSHKey.from_file(key)
+      s.owner.should == 'bob+alias'
+      s.location.should == 'desktop'
+    end
   end
 
   describe '#owner' do
